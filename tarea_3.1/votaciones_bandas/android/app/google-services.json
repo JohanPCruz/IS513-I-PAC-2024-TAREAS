@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "668735461519",
+    "project_id": "bandas-rock-7c77b",
+    "storage_bucket": "bandas-rock-7c77b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668735461519:android:80865b310a00ee6544f8fa",
+        "android_client_info": {
+          "package_name": "com.example.votaciones_bandas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYqn5BAwMU125K4UjLQ9sAUzRG0Zw-i08"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
