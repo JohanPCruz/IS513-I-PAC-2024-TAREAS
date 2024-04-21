@@ -26,6 +26,12 @@ class MainScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image.asset(
+              'assets/images/rock.png', // Ruta de la imagen dentro de los recursos de tu proyecto
+              width: 300, // Ancho deseado de la imagen
+              height: 300, // Alto deseado de la imagen
+            ),
+            SizedBox(height: 200),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -35,7 +41,7 @@ class MainScreen extends StatelessWidget {
               },
               child: Text('Agregar banda de Rock'),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 70),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
