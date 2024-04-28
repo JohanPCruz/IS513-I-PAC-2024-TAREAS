@@ -27,9 +27,9 @@ class MainScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/images/rock.png', // Ruta de la imagen dentro de los recursos de tu proyecto
-              width: 300, // Ancho deseado de la imagen
-              height: 300, // Alto deseado de la imagen
+              'assets/images/rock.png', 
+              width: 300, 
+              height: 300, 
             ),
             SizedBox(height: 200),
             ElevatedButton(

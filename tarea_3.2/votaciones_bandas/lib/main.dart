@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart'; // Importa el paquete Firebase Core
+import 'package:firebase_core/firebase_core.dart';
 import 'package:votaciones_bandas/firebase_options.dart';
 import 'main_screen.dart';
 
