@@ -35,6 +35,17 @@ class VotingScreen extends StatelessWidget {
               return ListTile(
                 title: Text(data['name']),
                 subtitle: Text('Álbum: ${data['album']} - Año: ${data['year']} - Votos: ${data['votes']}'),
+                leading: data['imageUrl'] != null
+                  ? CircleAvatar(
+                      backgroundImage: NetworkImage(data['imageUrl']),
+                    )
+                  : CircleAvatar(
+                      child: Icon(
+                        Icons.music_note,
+                        color: Colors.white,
+                      ),
+                      backgroundColor: Colors.grey,
+                    ),
                 onTap: () {
                   FirebaseFirestore.instance.runTransaction((transaction) async {
                     DocumentSnapshot freshSnapshot = await transaction.get(document.reference);
