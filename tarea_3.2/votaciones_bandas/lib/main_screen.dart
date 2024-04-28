@@ -20,36 +20,54 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Votaciones de Bandas de Rock'),
+        toolbarHeight: 150,
+        title: Center(
+          child: Text(
+            'Votaciones de Bandas de Rock', 
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 26),
+            )
+          ),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/images/rock.png', 
-              width: 300, 
-              height: 300, 
-            ),
-            SizedBox(height: 200),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AddBandScreen()),
-                );
-              },
-              child: Text('Agregar banda de Rock'),
-            ),
-            SizedBox(height: 70),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => VotingScreen()),
-                );
-              },
-              child: Text('Votaciones'),
+            SizedBox(height: 10),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: Image.asset(
+                      'assets/images/rock.jpeg', 
+                      width: 300, 
+                      height: 300, 
+                    ),
+                  ),
+                  SizedBox(height: 70),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AddBandScreen()),
+                      );
+                    },
+                    child: Text('Agregar banda de Rock'),
+                  ),
+                  SizedBox(height: 70),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => VotingScreen()),
+                      );
+                    },
+                    child: Text('Votaciones'),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

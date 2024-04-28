@@ -1,12 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'voting_screen.dart';
+import 'package:votaciones_bandas/optimization/input_data.dart';
 
 
-class AddBandScreen extends StatelessWidget {
+class AddBandScreen extends StatefulWidget {
+  @override
+  _AddBandScreenState createState() => _AddBandScreenState();
+}
+
+class _AddBandScreenState extends State{
   final TextEditingController nameController = TextEditingController();
   final TextEditingController albumController = TextEditingController();
   final TextEditingController yearController = TextEditingController();
@@ -35,9 +42,7 @@ void _addBand(BuildContext context) async {
         context,
         MaterialPageRoute(builder: (context) => VotingScreen()),
       );
-    }).catchError((error) => print("Error al añadir banda: $error"));
-  } else {
-    print('No se ha seleccionado ninguna imagen.');
+    });
   }
 }
 
@@ -45,7 +50,9 @@ void _addBand(BuildContext context) async {
 Future<void> _getImageFromGallery() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      _imageFile = File(pickedFile.path);
+      setState(() {
+        _imageFile = File(pickedFile.path);
+      });
     }
   }
 
@@ -56,36 +63,74 @@ Future<void> _getImageFromGallery() async {
       appBar: AppBar(
         title: Text('Agregar Banda de Rock'),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextField(
-              controller: nameController,
-              decoration: InputDecoration(labelText: 'Nombre de la Banda'),
-            ),
-            TextField(
-              controller: albumController,
-              decoration: InputDecoration(labelText: 'Álbum'),
-            ),
-            TextField(
-              controller: yearController,
-              decoration: InputDecoration(labelText: 'Año de Lanzamiento'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => _addBand(context),
-              child: Text('Agregar Banda'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-            onPressed: _getImageFromGallery,
-            child: Text('Seleccionar Imagen desde Galería'),
-    ),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Visibility(
+                  visible: _imageFile != null,
+                  child: Container(
+                    width: 200,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.grey, 
+                        width: 1.0, 
+                      ),
+                    ),
+                    child: _imageFile != null
+                        ? Image.file(
+                            _imageFile!,
+                            fit: BoxFit.cover, 
+                          )
+                        : SizedBox(), 
+                  ),
+                ),
+              ),
+              SizedBox(height: 30),
+              CustomInputData(
+                controller: nameController,
+                labelText: 'Nombre de la Banda',
+                prefixIcon: CupertinoIcons.guitars,
+                maxLength: 50,
+                keyboardType: TextInputType.text,
+              ),
+              CustomInputData(
+                controller: albumController,
+                labelText: 'Album',
+                prefixIcon: CupertinoIcons.music_albums,
+                maxLength: 50,
+                keyboardType: TextInputType.text,
+              ),
+              CustomInputData(
+                controller: yearController,
+                labelText: 'Año de Lanzamiento',
+                prefixIcon: CupertinoIcons.calendar,
+                maxLength: 4,
+                keyboardType: TextInputType.datetime,
+              ),
+              SizedBox(height: 20),
+              Center(
+                child: ElevatedButton(
+                  onPressed: _getImageFromGallery,
+                  child: Text('Seleccionar Imagen desde Galería'),
+                ),
+              ),
+              SizedBox(height: 70),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () => _addBand(context),
+                  child: Text('Agregar Banda'),
+              ),
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
