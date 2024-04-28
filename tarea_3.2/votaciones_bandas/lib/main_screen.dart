@@ -3,6 +3,8 @@ import 'add_band_screen.dart';
 import 'voting_screen.dart';
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -10,18 +12,20 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainScreen(),
+      home: const MainScreen(),
     );
   }
 }
 
 class MainScreen extends StatelessWidget {
+  const MainScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 150,
-        title: Center(
+        title: const Center(
           child: Text(
             'Votaciones de Bandas de Rock', 
             style: TextStyle(
@@ -33,7 +37,7 @@ class MainScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -46,17 +50,17 @@ class MainScreen extends StatelessWidget {
                       height: 300, 
                     ),
                   ),
-                  SizedBox(height: 70),
+                  const SizedBox(height: 70),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => AddBandScreen()),
+                        MaterialPageRoute(builder: (context) => const AddBandScreen()),
                       );
                     },
-                    child: Text('Agregar banda de Rock'),
+                    child: const Text('Agregar banda de Rock'),
                   ),
-                  SizedBox(height: 70),
+                  const SizedBox(height: 70),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
@@ -64,7 +68,7 @@ class MainScreen extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => VotingScreen()),
                       );
                     },
-                    child: Text('Votaciones'),
+                    child: const Text('Votaciones'),
                   ),
                 ],
               ),

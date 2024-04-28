@@ -9,7 +9,10 @@ import 'package:votaciones_bandas/optimization/input_data.dart';
 
 
 class AddBandScreen extends StatefulWidget {
+  const AddBandScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _AddBandScreenState createState() => _AddBandScreenState();
 }
 
@@ -43,6 +46,18 @@ void _addBand(BuildContext context) async {
         MaterialPageRoute(builder: (context) => VotingScreen()),
       );
     });
+  } else{
+    FirebaseFirestore.instance.collection('bands').add({
+      'name': name,
+      'album': album,
+      'year': year,
+      'votes': 0,
+    }).then((value) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => VotingScreen()),
+      );
+    });
   }
 }
 
@@ -61,11 +76,11 @@ Future<void> _getImageFromGallery() async {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Agregar Banda de Rock'),
+        title: const Text('Agregar Banda de Rock'),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -86,11 +101,11 @@ Future<void> _getImageFromGallery() async {
                             _imageFile!,
                             fit: BoxFit.cover, 
                           )
-                        : SizedBox(), 
+                        : const SizedBox(), 
                   ),
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               CustomInputData(
                 controller: nameController,
                 labelText: 'Nombre de la Banda',
@@ -112,18 +127,18 @@ Future<void> _getImageFromGallery() async {
                 maxLength: 4,
                 keyboardType: TextInputType.datetime,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Center(
                 child: ElevatedButton(
                   onPressed: _getImageFromGallery,
-                  child: Text('Seleccionar Imagen desde Galería'),
+                  child: const Text('Seleccionar Imagen desde Galería'),
                 ),
               ),
-              SizedBox(height: 70),
+              const SizedBox(height: 70),
               Center(
                 child: ElevatedButton(
                   onPressed: () => _addBand(context),
-                  child: Text('Agregar Banda'),
+                  child: const Text('Agregar Banda'),
               ),
               )
             ],
